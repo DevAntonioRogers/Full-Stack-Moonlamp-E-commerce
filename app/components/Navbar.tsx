@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useCartStore } from "@/store/useCartStore";
 
 // Next.js Imports
 import Image from "next/image";
@@ -10,9 +11,12 @@ import logo from "@/public/moonlamplogo.png";
 import { FiMenu } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
 import { BsCart4, BsFillBagHeartFill } from "react-icons/bs";
+import Cart from "./Cart";
 
 const Navbar = () => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
+
+  const cartStore = useCartStore();
 
   const handleMobileMenu = () => {
     setOpenMobileMenu(!openMobileMenu);
@@ -53,7 +57,7 @@ const Navbar = () => {
         </ul>
 
         <div className="flex gap-4 items-center text-[#1b263b] ml-auto md:ml-0">
-          <div>
+          <div onClick={() => cartStore.toggleCart()} className="cursor-pointer">
             <BsCart4 size={20} />
           </div>
           <BsFillBagHeartFill size={20} />
@@ -63,6 +67,7 @@ const Navbar = () => {
           {!openMobileMenu ? <FiMenu size={25} /> : <MdClose size={25} />}
         </div>
       </div>
+      {!cartStore.isOpen && <Cart />}
     </nav>
   );
 };
