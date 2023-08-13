@@ -1,7 +1,9 @@
 "use client";
-
 import { useState } from "react";
 import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
+import AddToCartButton from "./UI/AddToCartButton";
+import AddToWishlistButton from "./UI/AddToWishlistButton";
+import { motion } from "framer-motion";
 
 // Product Images
 import image1 from "@/public/productimage1.jpeg";
@@ -9,60 +11,53 @@ import image2 from "@/public/productimage2.jpeg";
 import image3 from "@/public/productimage3.jpeg";
 import image4 from "@/public/productimage4.jpeg";
 import Image from "next/image";
-import AddToCartButton from "./UI/AddToCartButton";
 
 const Products = ({ name, image, unit_amount, id, description, metadata, quantity }) => {
   const productData = { name, image, unit_amount, id, description, metadata };
   const [currentImage, setCurrentImage] = useState(0);
 
   const productImages = [image1, image2, image3, image4];
+
+  // Framer Motion Variants for a smoother Image transition
+  const imageVariants = {
+    exit: { opacity: 0, y: 20, scale: 0.98, transition: { duration: 0.4 } },
+    enter: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4 } },
+  };
+
   return (
     <section className="py-20">
       <div className="w-[89%] m-auto max-w-[1400px] grid grid-cols-1 md:grid-cols-2 items-center gap-5">
         {/* Left Side */}
         <div className="flex gap-4 items-center">
           <div className="flex flex-col gap-4">
-            <Image
-              src={productImages[0]}
-              width={100}
-              onClick={(e) => setCurrentImage(0)}
-              height={100}
-              alt="main-image"
-              className="rounded-md"
-            />
-            <Image
-              src={productImages[1]}
-              width={100}
-              onClick={(e) => setCurrentImage(1)}
-              height={100}
-              alt="main-image"
-              className="rounded-md"
-            />
-            <Image
-              src={productImages[2]}
-              width={100}
-              onClick={(e) => setCurrentImage(2)}
-              height={100}
-              alt="main-image"
-              className="rounded-md"
-            />
-            <Image
-              src={productImages[3]}
-              width={100}
-              onClick={(e) => setCurrentImage(3)}
-              height={100}
-              alt="main-image"
-              className="rounded-md"
-            />
+            {productImages.map((img, index) => (
+              <Image
+                key={index}
+                src={img}
+                width={100}
+                onClick={() => setCurrentImage(index)}
+                height={100}
+                alt="thumbnail-image"
+                className="rounded-md cursor-pointer"
+              />
+            ))}
           </div>
           <div className="flex items-center">
-            <Image src={productImages[currentImage]} width={480} height={480} alt="main-image" className="rounded-md" />
+            <motion.div initial="exit" animate="enter" exit="exit" variants={imageVariants} key={currentImage}>
+              <Image
+                src={productImages[currentImage]}
+                width={480}
+                height={480}
+                alt="main-image"
+                className="rounded-md"
+              />
+            </motion.div>
           </div>
         </div>
 
         {/* RIGHT SIDE */}
         <div className="text-center">
-          <h2 className="text-4xl font-bold mb-5">Wireless Moonlamp</h2>
+          <h2 className="text-4xl font-bold mb-5">{name}</h2>
           <div className="flex gap-1 text-yellow-400 justify-center items-center mb-5">
             <AiFillStar />
             <AiFillStar />
@@ -81,10 +76,7 @@ const Products = ({ name, image, unit_amount, id, description, metadata, quantit
           </p>
           <div className="flex justify-center items-center gap-5">
             <AddToCartButton {...productData} />
-            <div className="flex items-center gap-2 justify-center">
-              <AiOutlineHeart />
-              <span>Add To Wishlist</span>
-            </div>
+            <AddToWishlistButton {...productData} />
           </div>
         </div>
       </div>

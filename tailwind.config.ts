@@ -10,6 +10,12 @@ module.exports = {
       backgroundImage: {
         'parallax': 'url("../public/parallax.jpg")',
       },
+      colors: {
+        'primary': '#415a77',
+        'secondary': '#778da9',
+        'dark': '#1b263b',
+        'primarybg': '#e0e1dd',
+      },
     },
   },
   plugins: [],

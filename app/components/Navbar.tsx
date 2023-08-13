@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useCartStore } from "@/store/useCartStore";
+import { useWishlistStore } from "@/store/useWishlistStore";
 
 // Next.js Imports
 import Image from "next/image";
@@ -12,11 +13,13 @@ import { FiMenu } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
 import { BsCart4, BsFillBagHeartFill } from "react-icons/bs";
 import Cart from "./Cart";
+import WishList from "./Wishlist";
 
 const Navbar = () => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
   const cartStore = useCartStore();
+  const wishlistStore = useWishlistStore();
 
   const handleMobileMenu = () => {
     setOpenMobileMenu(!openMobileMenu);
@@ -30,37 +33,44 @@ const Navbar = () => {
         <ul
           className={`md:flex items-center gap-8 md:static absolute text-gray-600  ${
             openMobileMenu
-              ? "top-12 py-4 w-full bg-[#FFAFCC] left-0 text-center space-y-10 text-white drop-shadow-lg z-20"
+              ? "top-12 py-10 w-full bg-primarybg left-0 text-center space-y-10 text-white drop-shadow-lg z-20"
               : "hidden"
           }`}
         >
           <li>
             <a href="/" onClick={() => setOpenMobileMenu(false)}>
-              Buy Now
+              Shop
             </a>
           </li>
           <li>
             <a href="#about" onClick={() => setOpenMobileMenu(false)}>
-              About Us
+              More Info
             </a>
           </li>
           <li>
             <a href="#pricing" onClick={() => setOpenMobileMenu(false)}>
-              Contact Us
+              FAQ
             </a>
           </li>
           <li>
             <a href="#contact" onClick={() => setOpenMobileMenu(false)}>
-              Tracking
+              Contact
             </a>
           </li>
         </ul>
 
         <div className="flex gap-4 items-center text-[#1b263b] ml-auto md:ml-0">
-          <div onClick={() => cartStore.toggleCart()} className="cursor-pointer">
+          <div onClick={() => cartStore.toggleCart()} className="cursor-pointer relative">
             <BsCart4 size={20} />
+            {cartStore.cart.length > 0 && (
+              <span className="bg-primary text-white text-sm font-bold w-4 h-4 rounded-full absolute left-2 bottom-3 flex items-center justify-center">
+                {cartStore.cart.length}
+              </span>
+            )}
           </div>
-          <BsFillBagHeartFill size={20} />
+          <div onClick={() => wishlistStore.toggleWishList()} className="cursor-pointer">
+            <BsFillBagHeartFill size={20} />
+          </div>
         </div>
 
         <div className="md:hidden ml-4" onClick={handleMobileMenu}>
@@ -68,6 +78,7 @@ const Navbar = () => {
         </div>
       </div>
       {!cartStore.isOpen && <Cart />}
+      {!wishlistStore.openWishlist && <WishList />}
     </nav>
   );
 };

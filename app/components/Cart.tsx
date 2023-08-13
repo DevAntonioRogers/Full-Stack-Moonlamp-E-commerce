@@ -15,6 +15,7 @@ const Cart = () => {
         className="bg-white absolute right-0 top-0 md:w-2/5 w-3/4 h-screen p-12 overflow-x-scroll"
       >
         <>
+          <button onClick={() => cartStore.toggleCart()}>Back to store</button>
           {cartStore.cart.map((product) => (
             <div className="flex py-4 gap-4 items-center border-b-grey-600 border-b-2 justify-between mb-5">
               <Image src={product.image} width={150} height={150} alt="moonlamp" />
