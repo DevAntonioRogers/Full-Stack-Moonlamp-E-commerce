@@ -1,5 +1,5 @@
 import { useCartStore } from "@/store/useCartStore";
-import { ProductType } from "@/Types/ProductTypes";
+import { ProductType } from "@/types/productType";
 import { BiMinus } from "react-icons/bi";
 
 interface DecrementPropType {

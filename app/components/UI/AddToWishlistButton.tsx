@@ -1,7 +1,8 @@
 import { AiOutlineHeart } from "react-icons/ai";
 import { useWishlistStore } from "@/store/useWishlistStore";
+import { ProductType } from "@/types/productType";
 
-const AddToWishlistButton = ({ name, id, image, unit_amount, quantity }) => {
+const AddToWishlistButton = ({ name, id, image, unit_amount, quantity }: ProductType) => {
   const wishlistStore = useWishlistStore();
 
   return (

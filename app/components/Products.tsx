@@ -4,6 +4,7 @@ import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
 import AddToCartButton from "./UI/AddToCartButton";
 import AddToWishlistButton from "./UI/AddToWishlistButton";
 import { motion } from "framer-motion";
+import { ProductType } from "@/types/productType";
 
 // Product Images
 import image1 from "@/public/productimage1.jpeg";
@@ -12,8 +13,8 @@ import image3 from "@/public/productimage3.jpeg";
 import image4 from "@/public/productimage4.jpeg";
 import Image from "next/image";
 
-const Products = ({ name, image, unit_amount, id, description, metadata, quantity }) => {
-  const productData = { name, image, unit_amount, id, description, metadata };
+const Products = ({ name, image, unit_amount, id, description, quantity }: ProductType) => {
+  const productData = { name, image, unit_amount, id, description, quantity };
   const [currentImage, setCurrentImage] = useState(0);
 
   const productImages = [image1, image2, image3, image4];

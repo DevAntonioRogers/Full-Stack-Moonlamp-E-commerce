@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { CartType } from "../Types/CartTypes";
+import { CartType } from "@/types/cartTypes";
 
 type WishlistState = {
   isOpen: boolean;
