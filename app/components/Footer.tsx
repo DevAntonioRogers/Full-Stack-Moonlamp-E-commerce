@@ -1,6 +1,7 @@
 import Image from "next/image";
 import logo from "@/public/moonlamplogo.png";
-import { AiFillFacebook } from "react-icons/ai";
+import { AiFillFacebook, AiFillInstagram, AiFillTwitterSquare } from "react-icons/ai";
+import { FaSnapchatSquare, FaPinterestSquare } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -13,21 +14,29 @@ const Footer = () => {
 
               <ul className="flex justify-center mt-8 gap-3">
                 <li>
-                  <div className="w-11 h-11 rounded flex items-center justify-center text-lg bg-gray-100 text-black hover:text-white hover:bg-primary transition-all">
-                    <AiFillFacebook />
+                  <div className="w-11 h-11 rounded flex items-center justify-center text-lg bg-gray-100 text-secondary hover:text-white hover:bg-primary transition-all">
+                    <AiFillFacebook size={25} />
                   </div>
                 </li>
                 <li>
-                  <div className="w-11 h-11 rounded flex items-center justify-center text-lg bg-gray-100 text-black hover:text-white hover:bg-primary transition-all"></div>
+                  <div className="w-11 h-11 rounded flex items-center justify-center text-lg bg-gray-100 text-secondary hover:text-white hover:bg-primary transition-all">
+                    <AiFillInstagram size={25} />
+                  </div>
                 </li>
                 <li>
-                  <div className="w-11 h-11 rounded flex items-center justify-center text-lg bg-gray-100 text-black hover:text-white hover:bg-primary transition-all"></div>
+                  <div className="w-11 h-11 rounded flex items-center justify-center text-lg bg-gray-100 text-secondary hover:text-white hover:bg-primary transition-all">
+                    <AiFillTwitterSquare size={25} />
+                  </div>
                 </li>
                 <li>
-                  <div className="w-11 h-11 rounded flex items-center justify-center text-lg bg-gray-100 text-black hover:text-white hover:bg-primary transition-all"></div>
+                  <div className="w-11 h-11 rounded flex items-center justify-center text-lg bg-gray-100 text-secondary hover:text-white hover:bg-primary transition-all">
+                    <FaPinterestSquare size={25} />
+                  </div>
                 </li>
                 <li>
-                  <div className="w-11 h-11 rounded flex items-center justify-center text-lg bg-gray-100 text-black hover:text-white hover:bg-primary transition-all"></div>
+                  <div className="w-11 h-11 rounded flex items-center justify-center text-lg bg-gray-100 text-secondary hover:text-white hover:bg-primary transition-all">
+                    <FaSnapchatSquare size={25} />
+                  </div>
                 </li>
               </ul>
 

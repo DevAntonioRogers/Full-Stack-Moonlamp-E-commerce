@@ -1,6 +1,6 @@
 const Contact = () => {
   return (
-    <section className="py-10">
+    <section id="contact" className="py-10">
       <div className="w-[89%] mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div>

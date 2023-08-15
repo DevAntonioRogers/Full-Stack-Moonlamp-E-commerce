@@ -17,6 +17,31 @@ import WishList from "./Wishlist";
 
 const Navbar = () => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  useEffect(() => {
+    if (openMobileMenu) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "auto";
+    }
+  }, [openMobileMenu]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolling(true);
+      } else {
+        setIsScrolling(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const cartStore = useCartStore();
   const wishlistStore = useWishlistStore();
@@ -26,7 +51,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="py-3">
+    <nav className={`py-4 w-full ${isScrolling ? "fixed top-0 bg-white shadow-lg z-10" : "relative"}`}>
       <div className="w-[89%] m-auto flex justify-between items-center  max-w-[1400px]">
         <Image src={logo} width={200} height={200} alt="moon lamp" />
 
@@ -43,12 +68,12 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-            <a href="#about" onClick={() => setOpenMobileMenu(false)}>
-              More Info
+            <a href="#features" onClick={() => setOpenMobileMenu(false)}>
+              Features
             </a>
           </li>
           <li>
-            <a href="#pricing" onClick={() => setOpenMobileMenu(false)}>
+            <a href="#faq" onClick={() => setOpenMobileMenu(false)}>
               FAQ
             </a>
           </li>
