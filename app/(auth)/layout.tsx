@@ -1,26 +1,20 @@
-import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
+import { Inter } from "next/font/google";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  style: ["normal", "italic"],
-});
+import "../globals.css";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Moonlamp",
-  description: "Shop cool moonlamps",
+  description: "e-commerce website",
 };
 
+const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={poppins.className}>
-        <Hydration>
-          <Navbar />
-          {children}
-        </Hydration>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${inter.className} bg-secondary`}>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }
