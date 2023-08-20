@@ -19,7 +19,7 @@ const Products = ({ name, image, unit_amount, id, description, quantity }: Produ
 
   const productImages = [image1, image2, image3, image4];
 
-  // Framer Motion Variants for a smoother Image transition
+
   const imageVariants = {
     exit: { opacity: 0, y: 20, scale: 0.98, transition: { duration: 0.4 } },
     enter: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4 } },

@@ -7,84 +7,30 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
-  id       String    @id @default(cuid())
-  userId   String    @unique
-  orders   Order[]
-  accounts Account[]
-  sessions Session[]
-  wishlist Wishlist?
-}
-
-model Order {
-  id              String    @id @default(cuid())
+model Orders {
+  id              String         @id @default(cuid())
   userId          String
-  user            User      @relation(fields: [userId], references: [userId])
   amount          Float
   currency        String
   status          String
-  createdDate     DateTime  @default(now())
-  paymentIntentID String?   @unique
-  products        Product[]
-}
-
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  user              User    @relation(fields: [userId], references: [userId])
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.Text
-  session_state     String?
-
-  @@unique([provider, providerAccountId])
-}
-
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  user         User     @relation(fields: [userId], references: [userId])
-  expires      DateTime
-}
-
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
-}
-
-model Wishlist {
-  id            String         @id @default(cuid())
-  userId        String         @unique
-  user          User           @relation(fields: [userId], references: [userId])
-  wishlistItems WishlistItem[]
+  createdDate     DateTime       @default(now())
+  paymentIntentID String?        @unique
+  products        OrderProduct[]
 }
 
 model Product {
-  id            String         @id @default(cuid())
-  name          String
-  description   String?
-  unit_amount   Float
-  image         String?
-  quantity      Float          @default(0)
-  orders        Order[]
-  wishlistItems WishlistItem[]
+  id          String         @id @default(cuid())
+  name        String
+  unit_amount Float
+  orders      OrderProduct[]
 }
 
-model WishlistItem {
-  wishlist   Wishlist @relation(fields: [wishlistId], references: [id])
-  wishlistId String
-  product    Product  @relation(fields: [productId], references: [id])
-  productId  String
+model OrderProduct {
+  orderId   String  @map("order_id")
+  productId String  @map("product_id")
+  quantity  Int
+  order     Orders  @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
 
-  @@id([wishlistId, productId])
+  @@id([orderId, productId])
 }

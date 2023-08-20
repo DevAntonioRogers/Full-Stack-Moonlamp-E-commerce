@@ -3,7 +3,7 @@ export type ProductType = {
   image: string
   unit_amount: number | null
   id: string
-  quantity?: number | 1
+  quantity?: number
   description?: string | null
 
 

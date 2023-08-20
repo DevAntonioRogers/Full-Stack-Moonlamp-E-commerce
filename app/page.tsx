@@ -5,10 +5,10 @@ import Features from "./components/Features";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Products from "./components/Products";
-import { getProducts } from "@/utils/fetchStripeProducts";
+import { FetchProducts } from "@/utils/fetchStripeProducts";
 
 const Home = async () => {
-  const products = await getProducts();
+  const products = await FetchProducts();
   return (
     <>
       <Hero />

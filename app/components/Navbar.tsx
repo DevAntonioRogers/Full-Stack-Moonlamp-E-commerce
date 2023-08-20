@@ -61,7 +61,9 @@ const Navbar = () => {
   return (
     <nav className={`py-4 w-full ${isScrolling ? "fixed top-0 bg-white shadow-lg z-10" : "relative"}`}>
       <div className="w-[89%] m-auto flex justify-between items-center  max-w-[1400px]">
-        <Image src={logo} width={150} height={150} alt="moon lamp" />
+        <a href="/">
+          <Image src={logo} width={150} height={150} alt="moon lamp" />
+        </a>
 
         <ul
           className={`md:flex items-center gap-8 md:static absolute text-gray-600  ${
@@ -88,6 +90,11 @@ const Navbar = () => {
           <li>
             <a href="#contact" onClick={() => setOpenMobileMenu(false)}>
               Contact
+            </a>
+          </li>
+          <li>
+            <a href="/orders" onClick={() => setOpenMobileMenu(false)}>
+              My Orders
             </a>
           </li>
         </ul>

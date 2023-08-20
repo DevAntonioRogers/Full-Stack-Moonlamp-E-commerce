@@ -5,19 +5,23 @@ import { CartType } from "@/types/cartTypes";
 type CartState = {
   isOpen: boolean;
   cart: CartType[];
-  addToCart: (item: CartType) => void;
   toggleCart: () => void;
+  clearCart: () => void;
+  addToCart: (item: CartType) => void;
   removeProduct: (item: CartType) => void;
+  paymentIntent: string;
+  onCheckout: string;
+  setPaymentIntent: (val: string) => void;
+  setCheckout: (val: string) => void;
 };
 
 export const useCartStore = create<CartState>()(
   persist(
     (set) => ({
-      // Set Initial State
       cart: [],
       isOpen: false,
-
-      //Setting State
+      paymentIntent: "",
+      onCheckout: "cart",
       toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
       addToCart: (item) =>
         set((state) => {
@@ -50,6 +54,9 @@ export const useCartStore = create<CartState>()(
             return { cart: filteredCart };
           }
         }),
+      setPaymentIntent: (val) => set((set) => ({ paymentIntent: val })),
+      setCheckout: (val) => set((set) => ({ onCheckout: val })),
+      clearCart: () => set((state) => ({ cart: [] })),
     }),
 
     { name: "cart-store" }

@@ -1,4 +1,25 @@
+"use client";
+import emailjs from "emailjs-com";
+import { useRef } from "react";
+
 const Contact = () => {
+  const form = useRef<HTMLFormElement>(null);
+
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (form.current) {
+      emailjs
+        .sendForm("service_syz6yoo", "template_q6z5hue", form.current, "e-tUlHJlOTz4QKTCO")
+        .then((result) => {
+          console.log(result.text);
+          form.current!.reset();
+        })
+        .catch((error) => {
+          console.log(error.text);
+        });
+    }
+  };
   return (
     <section id="contact" className="py-10">
       <div className="w-[89%] mx-auto max-w-[1400px]">
@@ -27,7 +48,7 @@ const Contact = () => {
           </div>
 
           <div className="lg:col-span-2">
-            <form>
+            <form ref={form} onSubmit={sendEmail}>
               <div className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <input
@@ -58,8 +79,8 @@ const Contact = () => {
                 <textarea
                   className="border border-gray-300 text-gray-900 text-sm block w-full p-3"
                   placeholder="Your Message"
-                  name="comments"
-                  id="comments"
+                  name="message"
+                  id="message"
                   rows={3}
                   style={{ resize: "none" }}
                 ></textarea>
